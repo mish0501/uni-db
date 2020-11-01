@@ -1,6 +1,6 @@
 INSERT INTO currency_types(`name`, `symbol`)
-VALUES ('Български лев', 'лв.'),
-  ('Евро', '€'),
-  ('Щатски долар', '$'),
-  ('Японска йена', '¥'),
-  ('Британска лира', '£');
+VALUES ('Bulgarian lev', 'лв.'),
+  ('Euro', '€'),
+  ('United States dollar', '$'),
+  ('Japanese yen', '¥'),
+  ('Pound sterling', '£');

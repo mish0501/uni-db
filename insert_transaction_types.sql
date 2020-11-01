@@ -1,9 +1,9 @@
 INSERT INTO `transaction_types` (`name`)
-VALUES ('Банкомат'),
-  ('Такса'),
-  ('Чек'),
-  ('Депозит'),
-  ('Онлайн'),
+VALUES ('ATM'),
+  ('Charge'),
+  ('Check'),
+  ('Deposit'),
+  ('Online'),
   ('POS'),
-  ('Превод'),
-  ('Теглене');
+  ('Transfer'),
+  ('Withdrawal');
