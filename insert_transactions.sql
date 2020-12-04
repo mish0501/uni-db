@@ -1,10 +1,4 @@
-INSERT INTO `transactions` (
-    `value`,
-    `employee_id`,
-    `bank_account_id`,
-    `transaction_type_id`,
-    `created_at`
-  )
+INSERT INTO `transactions` (`value`,`employee_id`,`bank_account_id`,`transaction_type_id`,`created_at`)
 VALUES ('68.00', 14, 5, 8, '2020-11-01 00:49:01'),
   ('105.00', 14, 4, 1, '2020-11-01 10:47:53'),
   ('562.00', 20, 3, 3, '2020-11-01 01:29:42'),
