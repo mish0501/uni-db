@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('PID', 10);
-            $table->string('address');
-            $table->string('phone', 15);
-            $table->rememberToken();
+            $table->string('account_number');
+            $table->decimal('interest_percentage', 2, 2);
+            $table->decimal('cash', 10,  2);
+            $table->foreignId('currency_type_id')->references('id')->on('currency_types');
+            $table->foreignId('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bank_accounts');
     }
 };
