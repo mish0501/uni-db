@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class BankAccount extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'account_number', 'interest_percentage', 'cash', 'currency_type_id', 'client_id',
+    ];
+
+    public function currencyType()
+    {
+        return $this->belongsTo(CurrencyType::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

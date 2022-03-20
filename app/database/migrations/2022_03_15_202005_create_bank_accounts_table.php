@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('account_number');
-            $table->decimal('interest_percentage', 2, 2);
+            $table->decimal('interest_percentage', 2, 2, true);
             $table->decimal('cash', 10,  2);
             $table->foreignId('currency_type_id')->references('id')->on('currency_types');
             $table->foreignId('client_id')->references('id')->on('clients');

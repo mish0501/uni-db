@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('PID', 10);
             $table->string('address');
-            $table->string('phone', 15);
+            $table->string('phone', 20);
             $table->rememberToken();
             $table->timestamps();
         });
