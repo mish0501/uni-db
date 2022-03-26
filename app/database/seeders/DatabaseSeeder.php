@@ -23,8 +23,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $myUser = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+        ]);
+
         $clientUsers = User::factory(10)->create();
+        $clientUsers->add($myUser);
+
         $employeeUsers = User::factory(10)->create();
+        $employeeUsers->add($myUser);
 
         $this->call([
             PositionSeeder::class,

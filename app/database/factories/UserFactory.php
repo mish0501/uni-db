@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'PID' => Str::random(10),
+            'PID' => $this->faker->unique()->numberBetween(100000000, 999999999),
             'address' => $this->faker->address(),
             'phone' => $this->faker->phoneNumber(),
             'remember_token' => Str::random(10),
