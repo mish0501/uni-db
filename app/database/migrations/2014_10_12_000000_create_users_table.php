@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('PID', 10);
-            $table->string('address');
-            $table->string('phone', 20);
+            $table->string('PID', 10)->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
