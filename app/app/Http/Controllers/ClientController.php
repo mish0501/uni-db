@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest as StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
@@ -15,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Clients/Index', [
+            'clients' => Client::with('user:id,name,email,phone')->get(),
+        ]);
     }
 
     /**
