@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest as StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ClientController extends Controller
@@ -39,7 +41,24 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        dd($request->all());
+        $user = User::create([
+            'name' => $request->first_name . ' ' . $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => bcrypt($request->password),
+            'address' => $request->address,
+            'PID' => $request->pid,
+        ]);
+
+        $client = Client::create([
+            'user_id' => $user->id,
+        ]);
+
+        if ($client) {
+            return Redirect::route('clients.index')
+                ->with('message', 'Client created successfully')
+                ->with('type', 'success');
+        }
     }
 
     /**
@@ -56,12 +75,14 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Client  $clients
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $clients)
+    public function edit(Client $client)
     {
-        //
+        return Inertia::render('Clients/Edit', [
+            'client' => $client->load('user'),
+        ]);
     }
 
     /**

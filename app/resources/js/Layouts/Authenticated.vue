@@ -6,12 +6,16 @@ import BreezeDropdownLink from "@/Components/DropdownLink.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import Notification from "@/Components/Notification.vue";
 
 const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
     <div>
+        <!-- <Notification v-if="$page.props?.flash?.type" /> -->
+        <Notification />
+
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -35,14 +39,14 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Начало
+                                    Dashboard
                                 </BreezeNavLink>
 
                                 <BreezeNavLink
                                     :href="route('clients.index')"
                                     :active="route().current('clients.index')"
                                 >
-                                    Клиенти
+                                    Clients
                                 </BreezeNavLink>
                             </div>
                         </div>
@@ -81,7 +85,7 @@ const showingNavigationDropdown = ref(false);
                                             method="post"
                                             as="button"
                                         >
-                                            Изход
+                                            Sign out
                                         </BreezeDropdownLink>
                                     </template>
                                 </BreezeDropdown>
@@ -144,13 +148,13 @@ const showingNavigationDropdown = ref(false);
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
-                            Начало
+                            Dashboard
                         </BreezeResponsiveNavLink>
                         <BreezeResponsiveNavLink
                             :href="route('clients.index')"
                             :active="route().current('clients.index')"
                         >
-                            Клиенти
+                            Clients
                         </BreezeResponsiveNavLink>
                     </div>
 
@@ -171,7 +175,7 @@ const showingNavigationDropdown = ref(false);
                                 method="post"
                                 as="button"
                             >
-                                Изход
+                                Sign out
                             </BreezeResponsiveNavLink>
                         </div>
                     </div>

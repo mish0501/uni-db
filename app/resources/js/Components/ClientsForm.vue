@@ -1,5 +1,4 @@
 <script setup>
-import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { defineProps } from "vue";
 
@@ -30,23 +29,29 @@ const form = useForm({
     address: null,
 });
 
-form.defaults({
-    ...client,
-});
+if (client.user) {
+    form.defaults({
+        email: client.user.email,
+        first_name: client.user.first_name,
+        last_name: client.user.last_name,
+        phone: client.user.phone,
+        pid: client.user.PID,
+        address: client.user.address,
+    });
+
+    form.reset();
+}
 
 let buttonText, method;
 
 switch (action) {
     case "create":
-        buttonText = "Добави";
         method = "post";
         break;
     case "update":
-        buttonText = "Запази";
         method = "put";
         break;
     default:
-        buttonText = "Добави";
         method = "post";
         break;
 }
@@ -55,6 +60,7 @@ function onSubmit() {
     form.submit(method, url);
 }
 </script>
+
 <template>
     <form @submit.prevent="onSubmit">
         <div class="relative z-0 mb-6 w-full group">
@@ -233,7 +239,7 @@ function onSubmit() {
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             :disabled="processing"
         >
-            {{ buttonText }}
+            Submit
         </button>
     </form>
 </template>
