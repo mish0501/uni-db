@@ -1,7 +1,8 @@
 <script setup>
-// const { message, type } = $page.props.flash;
-const message = "asdsada";
-const type = "success";
+import { usePage } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
+
+const { message, type } = usePage().props.value.flash;
 
 let icon, color, title;
 
@@ -12,30 +13,32 @@ switch (type) {
         title = "Success";
         break;
     case "error":
-        icon = "times";
-        color = "red";
+        icon = "xmark-circle";
+        color = "text-red-600";
         title = "Error";
         break;
     case "warning":
-        icon = "exclamation-triangle";
-        color = "orange";
+        icon = "exclamation-circle";
+        color = "text-orange-600";
         title = "Warning";
         break;
     case "info":
-        icon = "info-circle";
-        color = "blue";
-        title = "Info";
-        break;
     default:
         icon = "info-circle";
-        color = "blue";
+        color = "text-blue-600";
         title = "Info";
         break;
 }
+
+let show = ref(message !== null && message !== undefined);
+
+setTimeout(() => {
+    show.value = false;
+}, 5000);
 </script>
 
 <template>
-    <div class="absolute top-8 right-10 z-10">
+    <div class="absolute top-8 right-10 z-10" v-if="show">
         <div class="m-auto">
             <div
                 class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg"
