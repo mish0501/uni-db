@@ -30,10 +30,12 @@ const form = useForm({
 });
 
 if (client.user) {
+    const userNames = client.user.name.split(" ");
+
     form.defaults({
         email: client.user.email,
-        first_name: client.user.first_name,
-        last_name: client.user.last_name,
+        first_name: userNames[0],
+        last_name: userNames[userNames.length - 1],
         phone: client.user.phone,
         pid: client.user.PID,
         address: client.user.address,
@@ -57,6 +59,15 @@ switch (action) {
 }
 
 function onSubmit() {
+    if (client.user) {
+        form.transform((data) => {
+            if (!data.password && !data.password_confirmation) {
+                delete data.password;
+            }
+
+            return data;
+        });
+    }
     form.submit(method, url);
 }
 </script>

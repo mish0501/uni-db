@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use App\Http\Requests\StoreClientRequest as StoreClientRequest;
+use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
+use App\Services\ClientsService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ClientController extends Controller
@@ -19,7 +19,7 @@ class ClientController extends Controller
     public function index()
     {
         return Inertia::render('Clients/Index', [
-            'clients' => Client::with('user:id,name,email,phone')->get(),
+            'clients' => ClientsService::getClients(),
         ]);
     }
 
@@ -41,24 +41,7 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        $user = User::create([
-            'name' => $request->first_name . ' ' . $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => bcrypt($request->password),
-            'address' => $request->address,
-            'PID' => $request->pid,
-        ]);
-
-        $client = Client::create([
-            'user_id' => $user->id,
-        ]);
-
-        if ($client) {
-            return Redirect::route('clients.index')
-                ->with('message', 'Client created successfully')
-                ->with('type', 'success');
-        }
+        return ClientsService::storeClient($request);
     }
 
     /**
@@ -89,22 +72,22 @@ class ClientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateClientRequest  $request
-     * @param  \App\Models\Client  $clients
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientRequest $request, Client $clients)
+    public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        return ClientsService::updateClient($request, $client);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Client  $clients
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $clients)
+    public function destroy(Client $client)
     {
-        //
+        return ClientsService::deleteClient($client);
     }
 }

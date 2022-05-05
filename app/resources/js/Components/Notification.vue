@@ -1,40 +1,50 @@
 <script setup>
 import { usePage } from "@inertiajs/inertia-vue3";
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 
-const { message, type } = usePage().props.value.flash;
+const flash = computed(() => usePage().props.value.flash);
 
-let icon, color, title;
+const icon = ref(""),
+    color = ref(""),
+    title = ref(""),
+    show = ref(false);
 
-switch (type) {
-    case "success":
-        icon = "check-circle";
-        color = "text-green-600";
-        title = "Success";
-        break;
-    case "error":
-        icon = "xmark-circle";
-        color = "text-red-600";
-        title = "Error";
-        break;
-    case "warning":
-        icon = "exclamation-circle";
-        color = "text-orange-600";
-        title = "Warning";
-        break;
-    case "info":
-    default:
-        icon = "info-circle";
-        color = "text-blue-600";
-        title = "Info";
-        break;
-}
+watch(flash, (newFlash, _) => {
+    switch (newFlash.type) {
+        case "success":
+            icon.value = "check-circle";
+            color.value = "text-green-600";
+            title.value = "Success";
+            break;
+        case "error":
+            icon.value = "xmark-circle";
+            color.value = "text-red-600";
+            title.value = "Error";
+            break;
+        case "warning":
+            icon.value = "exclamation-circle";
+            color.value = "text-orange-600";
+            title.value = "Warning";
+            break;
+        case "info":
+        default:
+            icon.value = "info-circle";
+            color.value = "text-blue-600";
+            title.value = "Info";
+            break;
+    }
 
-let show = ref(message !== null && message !== undefined);
-
-setTimeout(() => {
-    show.value = false;
-}, 5000);
+    if (
+        !show.value &&
+        newFlash.message !== null &&
+        newFlash.message !== undefined
+    ) {
+        show.value = true;
+        setTimeout(() => {
+            show.value = false;
+        }, 5000);
+    }
+});
 </script>
 
 <template>
@@ -51,7 +61,9 @@ setTimeout(() => {
                         <span class="font-semibold">{{ title }}</span>
                     </div>
                     <div class="mr-6">
-                        <span class="block text-gray-500">{{ message }}</span>
+                        <span class="block text-gray-500">{{
+                            flash.message
+                        }}</span>
                     </div>
                 </div>
             </div>

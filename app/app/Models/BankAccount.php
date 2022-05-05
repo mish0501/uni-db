@@ -27,4 +27,15 @@ class BankAccount extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($bakAccount) {
+            $bakAccount->transactions()->each(function ($transaction) {
+                $transaction->delete();
+            });
+        });
+    }
 }

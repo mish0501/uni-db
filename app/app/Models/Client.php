@@ -30,4 +30,20 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function bankAccounts()
+    {
+        return $this->hasMany(BankAccount::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($client) {
+            $client->bankAccounts()->each(function ($bankAccount) {
+                $bankAccount->delete();
+            });
+        });
+    }
 }

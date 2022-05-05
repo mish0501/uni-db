@@ -13,7 +13,6 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <!-- <Notification v-if="$page.props?.flash?.type" /> -->
         <Notification />
 
         <div class="min-h-screen bg-gray-100">
