@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Redirect;
@@ -28,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/clients', ClientController::class);
     Route::resource('/employees', EmployeeController::class);
+    Route::resource('/bankAccounts', BankAccountController::class);
 });
 
 

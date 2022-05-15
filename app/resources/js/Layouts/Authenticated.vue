@@ -53,6 +53,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Служители
                                 </BreezeNavLink>
+                                <BreezeNavLink
+                                    :href="route('bankAccounts.index')"
+                                    :active="route().current('bankAccounts.*')"
+                                >
+                                    Банкови сметки
+                                </BreezeNavLink>
                             </div>
                         </div>
 
@@ -157,15 +163,21 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                         <BreezeResponsiveNavLink
                             :href="route('clients.index')"
-                            :active="route().current('clients.index')"
+                            :active="route().current('clients.*')"
                         >
                             Клиенти
                         </BreezeResponsiveNavLink>
                         <BreezeResponsiveNavLink
                             :href="route('employees.index')"
-                            :active="route().current('employees.index')"
+                            :active="route().current('employees.*')"
                         >
                             Служители
+                        </BreezeResponsiveNavLink>
+                        <BreezeResponsiveNavLink
+                            :href="route('bankAccounts.index')"
+                            :active="route().current('bankAccounts.*')"
+                        >
+                            Банкови сметки
                         </BreezeResponsiveNavLink>
                     </div>
 

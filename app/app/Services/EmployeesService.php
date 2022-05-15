@@ -41,7 +41,7 @@ class EmployeesService
             if ($employee) {
                 DB::commit();
 
-                return Redirect::route('Employees.index')
+                return Redirect::route('employees.index')
                     ->with('message', 'Employee created successfully')
                     ->with('type', 'success');
             }
@@ -50,7 +50,7 @@ class EmployeesService
         } catch (Exception $e) {
             DB::rollBack();
 
-            return Redirect::route('Employees.index')
+            return Redirect::route('employees.index')
                 ->with('message', $e)
                 ->with('type', 'error');
         }
@@ -80,7 +80,7 @@ class EmployeesService
 
             DB::commit();
 
-            return Redirect::route('Employees.index')
+            return Redirect::route('employees.index')
                 ->with('message', 'Employee updated successfully')
                 ->with('type', 'success');
         } catch (Exception $e) {
@@ -101,13 +101,13 @@ class EmployeesService
 
             DB::commit();
 
-            return Redirect::route('Employees.index')
+            return Redirect::route('employees.index')
                 ->with('message', 'Employee deleted successfully')
                 ->with('type', 'success');
         } catch (Exception $e) {
             DB::rollBack();
 
-            return Redirect::route('Employees.index')
+            return Redirect::route('employees.index')
                 ->with('message', 'Employee delete failed')
                 ->with('type', 'error');
         }

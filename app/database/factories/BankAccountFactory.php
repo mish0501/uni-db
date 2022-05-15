@@ -16,6 +16,8 @@ class BankAccountFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new \Faker\Provider\bg_BG\Payment($this->faker));
+
         return [
             'account_number' => $this->faker->bankAccountNumber,
             'interest_percentage' => $this->faker->randomFloat(2, 0, 0.99),

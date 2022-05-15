@@ -2,8 +2,8 @@
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 
-const { employees } = defineProps({
-    employees: {
+const { bankAccounts } = defineProps({
+    bankAccounts: {
         type: Array,
         default: () => [],
     },
@@ -11,12 +11,12 @@ const { employees } = defineProps({
 </script>
 
 <template>
-    <Head title="Служители" />
+    <Head title="Банкови сметки" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Служители
+                Банкови сметки
             </h2>
         </template>
 
@@ -25,7 +25,7 @@ const { employees } = defineProps({
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <Link
-                            :href="route('employees.create')"
+                            :href="route('bankAccounts.create')"
                             class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded my-3"
                             as="button"
                         >
@@ -47,25 +47,25 @@ const { employees } = defineProps({
                                             scope="col"
                                             class="px-6 py-3 text-center"
                                         >
-                                            Име
+                                            Номер на банкова сметка
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-center"
                                         >
-                                            Емейл
+                                            Сума
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-center"
                                         >
-                                            Телефон
+                                            Лихвен процент
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-center"
                                         >
-                                            Позиция
+                                            Име на клиента
                                         </th>
                                         <th
                                             scope="col"
@@ -78,23 +78,42 @@ const { employees } = defineProps({
                                 <tbody>
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                                        v-for="client in employees"
-                                        :key="client.id"
+                                        v-for="bankAccount in bankAccounts"
+                                        :key="bankAccount.id"
                                     >
-                                        <th
+                                        <td
                                             scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center"
                                         >
-                                            {{ client.user.name }}
-                                        </th>
-                                        <td class="px-6 py-4 text-center">
-                                            {{ client.user.email }}
+                                            {{ bankAccount.account_number }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-center"
+                                            v-if="
+                                                bankAccount.currency_type.id < 5
+                                            "
+                                        >
+                                            {{
+                                                bankAccount.currency_type.symbol
+                                            }}
+                                            {{ bankAccount.cash }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-center"
+                                            v-else
+                                        >
+                                            {{ bankAccount.cash }}
+                                            {{
+                                                bankAccount.currency_type.symbol
+                                            }}
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            {{ client.user.phone }}
+                                            {{
+                                                bankAccount.interest_percentage
+                                            }}%
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            {{ client.position.name }}
+                                            {{ bankAccount.client.user.name }}
                                         </td>
                                         <td
                                             class="px-6 py-4 flex justify-center gap-2"
@@ -102,8 +121,8 @@ const { employees } = defineProps({
                                             <Link
                                                 :href="
                                                     route(
-                                                        'employees.edit',
-                                                        client.id
+                                                        'bankAccounts.edit',
+                                                        bankAccount.id
                                                     )
                                                 "
                                                 as="button"
@@ -115,8 +134,8 @@ const { employees } = defineProps({
                                             <Link
                                                 :href="
                                                     route(
-                                                        'employees.destroy',
-                                                        client.id
+                                                        'bankAccounts.destroy',
+                                                        bankAccount.id
                                                     )
                                                 "
                                                 method="delete"

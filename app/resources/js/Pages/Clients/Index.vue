@@ -77,14 +77,14 @@ const { clients } = defineProps({
                                     >
                                         <th
                                             scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
+                                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center"
                                         >
                                             {{ client.user.name }}
                                         </th>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 text-center">
                                             {{ client.user.email }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        <td class="px-6 py-4 text-center">
                                             {{ client.user.phone }}
                                         </td>
                                         <td

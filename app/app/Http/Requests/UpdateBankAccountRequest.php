@@ -13,7 +13,7 @@ class UpdateBankAccountRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateBankAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'client_id' => 'required|exists:clients,id',
+            'currency_type_id' => 'required|exists:currency_types,id',
+            'interest_percentage' => 'required|numeric|min:0|max:100',
         ];
     }
 }

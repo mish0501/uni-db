@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\BankAccount;
 use App\Http\Requests\StoreBankAccountRequest;
 use App\Http\Requests\UpdateBankAccountRequest;
+use App\Models\Client;
+use App\Models\CurrencyType;
+use App\Services\BankAccountsService;
+use Inertia\Inertia;
 
 class BankAccountController extends Controller
 {
@@ -15,7 +19,9 @@ class BankAccountController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('BankAccounts/Index', [
+            'bankAccounts' => BankAccountsService::getBankAccounts(),
+        ]);
     }
 
     /**
@@ -25,7 +31,10 @@ class BankAccountController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('BankAccounts/Create', [
+            'clients' => Client::with('user')->get(),
+            'currencyTypes' => CurrencyType::all(),
+        ]);
     }
 
     /**
@@ -36,7 +45,7 @@ class BankAccountController extends Controller
      */
     public function store(StoreBankAccountRequest $request)
     {
-        //
+        return BankAccountsService::storeBankAccount($request);
     }
 
     /**
@@ -58,7 +67,11 @@ class BankAccountController extends Controller
      */
     public function edit(BankAccount $bankAccount)
     {
-        //
+        return Inertia::render('BankAccounts/Edit', [
+            'bankAccount' => $bankAccount->load('client.user', 'currencyType'),
+            'clients' => Client::with('user')->get(),
+            'currencyTypes' => CurrencyType::all(),
+        ]);
     }
 
     /**
@@ -70,7 +83,7 @@ class BankAccountController extends Controller
      */
     public function update(UpdateBankAccountRequest $request, BankAccount $bankAccount)
     {
-        //
+        return BankAccountsService::updateBankAccount($request, $bankAccount);
     }
 
     /**
@@ -81,6 +94,6 @@ class BankAccountController extends Controller
      */
     public function destroy(BankAccount $bankAccount)
     {
-        //
+        return BankAccountsService::deleteBankAccount($bankAccount);
     }
 }
