@@ -43,9 +43,15 @@ const showingNavigationDropdown = ref(false);
 
                                 <BreezeNavLink
                                     :href="route('clients.index')"
-                                    :active="route().current('clients.index')"
+                                    :active="route().current('clients.*')"
                                 >
                                     Клиенти
+                                </BreezeNavLink>
+                                <BreezeNavLink
+                                    :href="route('employees.index')"
+                                    :active="route().current('employees.*')"
+                                >
+                                    Служители
                                 </BreezeNavLink>
                             </div>
                         </div>
@@ -154,6 +160,12 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('clients.index')"
                         >
                             Клиенти
+                        </BreezeResponsiveNavLink>
+                        <BreezeResponsiveNavLink
+                            :href="route('employees.index')"
+                            :active="route().current('employees.index')"
+                        >
+                            Служители
                         </BreezeResponsiveNavLink>
                     </div>
 

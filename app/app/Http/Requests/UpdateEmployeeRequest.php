@@ -23,8 +23,17 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function rules()
     {
+        $userId = $this->route('employee')->user->id;
+
         return [
-            //
+            'email' => 'required|string|email|max:255|unique:users,email,' . $userId,
+            'phone' => 'required|string|max:255',
+            'password' => 'sometimes|string|min:6|confirmed',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'pid' => 'required|digits:10',
+            'position' => 'required|exists:positions,id',
         ];
     }
 }

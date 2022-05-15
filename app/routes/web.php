@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('dashboard');
 
     Route::resource('/clients', ClientController::class);
+    Route::resource('/employees', EmployeeController::class);
 });
 
 
