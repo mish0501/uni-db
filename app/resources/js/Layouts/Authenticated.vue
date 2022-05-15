@@ -38,14 +38,14 @@ const showingNavigationDropdown = ref(false);
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
                                 >
-                                    Dashboard
+                                    Начало
                                 </BreezeNavLink>
 
                                 <BreezeNavLink
                                     :href="route('clients.index')"
                                     :active="route().current('clients.index')"
                                 >
-                                    Clients
+                                    Клиенти
                                 </BreezeNavLink>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ const showingNavigationDropdown = ref(false);
                                             method="post"
                                             as="button"
                                         >
-                                            Sign out
+                                            Изход
                                         </BreezeDropdownLink>
                                     </template>
                                 </BreezeDropdown>
@@ -147,13 +147,13 @@ const showingNavigationDropdown = ref(false);
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
-                            Dashboard
+                            Начало
                         </BreezeResponsiveNavLink>
                         <BreezeResponsiveNavLink
                             :href="route('clients.index')"
                             :active="route().current('clients.index')"
                         >
-                            Clients
+                            Клиенти
                         </BreezeResponsiveNavLink>
                     </div>
 
@@ -174,7 +174,7 @@ const showingNavigationDropdown = ref(false);
                                 method="post"
                                 as="button"
                             >
-                                Sign out
+                                Изход
                             </BreezeResponsiveNavLink>
                         </div>
                     </div>

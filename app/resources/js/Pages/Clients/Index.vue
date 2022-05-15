@@ -11,12 +11,12 @@ const { clients } = defineProps({
 </script>
 
 <template>
-    <Head title="Clients" />
+    <Head title="Клиенти" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Clients
+                Клиенти
             </h2>
         </template>
 
