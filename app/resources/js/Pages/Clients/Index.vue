@@ -79,7 +79,17 @@ const { clients } = defineProps({
                                             scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center"
                                         >
-                                            {{ client.user.name }}
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'clients.show',
+                                                        client.id
+                                                    )
+                                                "
+                                                class="underline"
+                                            >
+                                                {{ client.user.name }}
+                                            </Link>
                                         </th>
                                         <td class="px-6 py-4 text-center">
                                             {{ client.user.email }}

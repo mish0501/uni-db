@@ -47,12 +47,14 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Client  $clients
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $clients)
+    public function show(Client $client)
     {
-        //
+        return Inertia::render('Clients/Show', [
+            'client' => $client->load('user', 'bankAccounts.currencyType'),
+        ]);
     }
 
     /**
