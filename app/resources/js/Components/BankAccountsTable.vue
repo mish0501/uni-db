@@ -1,7 +1,7 @@
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
 
-const { bankAccounts } = defineProps({
+const { bankAccounts, fromClient } = defineProps({
     bankAccounts: {
         type: Array,
         default: () => [],

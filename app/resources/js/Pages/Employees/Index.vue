@@ -78,23 +78,32 @@ const { employees } = defineProps({
                                 <tbody>
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                                        v-for="client in employees"
-                                        :key="client.id"
+                                        v-for="employee in employees"
+                                        :key="employee.id"
                                     >
                                         <th
                                             scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center"
                                         >
-                                            {{ client.user.name }}
+                                            <Link
+                                                :href="
+                                                    route('employees.show', {
+                                                        id: employee.id,
+                                                    })
+                                                "
+                                                class="underline"
+                                            >
+                                                {{ employee.user.name }}
+                                            </Link>
                                         </th>
                                         <td class="px-6 py-4 text-center">
-                                            {{ client.user.email }}
+                                            {{ employee.user.email }}
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            {{ client.user.phone }}
+                                            {{ employee.user.phone }}
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            {{ client.position.name }}
+                                            {{ employee.position.name }}
                                         </td>
                                         <td
                                             class="px-6 py-4 flex justify-center gap-2"
@@ -103,7 +112,7 @@ const { employees } = defineProps({
                                                 :href="
                                                     route(
                                                         'employees.edit',
-                                                        client.id
+                                                        employee.id
                                                     )
                                                 "
                                                 as="button"
@@ -116,7 +125,7 @@ const { employees } = defineProps({
                                                 :href="
                                                     route(
                                                         'employees.destroy',
-                                                        client.id
+                                                        employee.id
                                                     )
                                                 "
                                                 method="delete"

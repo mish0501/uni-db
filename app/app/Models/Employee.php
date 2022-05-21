@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +30,8 @@ class Employee extends Model
         'user_id', 'position_id',
     ];
 
+    protected $appends = ['bank_accounts'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,5 +40,24 @@ class Employee extends Model
     public function position()
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'employee_id');
+    }
+
+    public function bankAccounts(): Attribute
+    {
+        return new Attribute(
+            get: fn () => BankAccount::join('transactions', 'transactions.bank_account_id', '=', 'bank_accounts.id')
+                ->where('transactions.employee_id', $this->id)
+                ->select('bank_accounts.*')
+                ->groupBy('bank_accounts.id')
+                ->with('currencyType')
+                ->with('client.user:id,name')
+                ->get()
+
+        );
     }
 }

@@ -103,7 +103,9 @@ class BankAccountsService
 
     public static function formatCash($cash, CurrencyType $currencyType)
     {
-        if (strpos($cash, '-') == 0) {
+        $minus = '';
+
+        if (strpos($cash, '-') === 0) {
             $minus = '- ';
             $cash = substr($cash, 1);
         }

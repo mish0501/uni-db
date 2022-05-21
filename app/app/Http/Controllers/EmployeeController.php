@@ -54,7 +54,10 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        // dd($employee->bankAccounts);
+        return Inertia::render('Employees/Show', [
+            'employee' => $employee->load('user')->toArray(),
+        ]);
     }
 
     /**
