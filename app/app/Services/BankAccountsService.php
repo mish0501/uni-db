@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\StoreBankAccountRequest;
 use App\Http\Requests\UpdateBankAccountRequest;
 use App\Models\BankAccount;
+use App\Models\CurrencyType;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\DB;
@@ -16,13 +17,7 @@ class BankAccountsService
     {
         return BankAccount::with('client.user')
             ->with('currencyType:id,symbol')
-            ->get()
-            ->each(fn ($bankAccount) => $bankAccount->account_number = self::maskAccountNumber($bankAccount->account_number));
-    }
-
-    private static function maskAccountNumber($accountNumber)
-    {
-        return substr($accountNumber, 0, -12) . '************';
+            ->get();
     }
 
     public static function storeBankAccount(StoreBankAccountRequest $request)
@@ -96,6 +91,32 @@ class BankAccountsService
             return Redirect::route('bankAccounts.index')
                 ->with('message', 'BankAccount delete failed')
                 ->with('type', 'error');
+        }
+    }
+
+    // UTIL
+
+    public static function maskAccountNumber($accountNumber)
+    {
+        return substr($accountNumber, 0, -12) . '************';
+    }
+
+    public static function formatCash($cash, CurrencyType $currencyType)
+    {
+        if (strpos($cash, '-') == 0) {
+            $minus = '- ';
+            $cash = substr($cash, 1);
+        }
+        switch ($currencyType->id) {
+            case CurrencyType::USD:
+            case CurrencyType::EUR:
+            case CurrencyType::GBP:
+            case CurrencyType::JPY:
+                return $minus . $currencyType->symbol . number_format($cash, 2);
+            case CurrencyType::BGN:
+                return $minus . number_format($cash, 2, ',', ' ') . ' ' . $currencyType->symbol;
+            default:
+                return $cash;
         }
     }
 }

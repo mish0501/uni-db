@@ -56,7 +56,13 @@ class BankAccountController extends Controller
      */
     public function show(BankAccount $bankAccount)
     {
-        //
+        return Inertia::render('BankAccounts/Show', [
+            'bankAccount' => $bankAccount->load([
+                'transactions.transactionType',
+                'transactions.employee.user',
+                'client.user:id,name'
+            ]),
+        ]);
     }
 
     /**

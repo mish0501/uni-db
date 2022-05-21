@@ -22,6 +22,12 @@ class CurrencyType extends Model
 {
     use HasFactory;
 
+    const USD = 1;
+    const EUR = 2;
+    const GBP = 3;
+    const JPY = 4;
+    const BGN = 5;
+
     public function bankAccounts()
     {
         return $this->hasMany(BankAccount::class);

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\BankAccountsService;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +14,20 @@ class BankAccount extends Model
     protected $fillable = [
         'account_number', 'interest_percentage', 'cash', 'currency_type_id', 'client_id',
     ];
+
+    protected function accountNumber(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => BankAccountsService::maskAccountNumber($value),
+        );
+    }
+
+    protected function cash(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => BankAccountsService::formatCash($value, $this->currencyType()->first()),
+        );
+    }
 
     public function currencyType()
     {

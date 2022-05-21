@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Services\BankAccountsService;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +18,13 @@ class Transaction extends Model
         'value',
         'employee_id',
     ];
+
+    protected function value(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => BankAccountsService::formatCash($value, $this->currencyType()->first()),
+        );
+    }
 
     public function bankAccount()
     {

@@ -49,18 +49,15 @@ const { bankAccounts } = defineProps({
                         scope="row"
                         class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center"
                     >
-                        {{ bankAccount.account_number }}
+                        <Link
+                            :href="route('bankAccounts.show', bankAccount.id)"
+                            class="underline"
+                        >
+                            {{ bankAccount.account_number }}
+                        </Link>
                     </td>
-                    <td
-                        class="px-6 py-4 text-center"
-                        v-if="bankAccount.currency_type.id < 5"
-                    >
-                        {{ bankAccount.currency_type.symbol }}
+                    <td class="px-6 py-4 text-center">
                         {{ bankAccount.cash }}
-                    </td>
-                    <td class="px-6 py-4 text-center" v-else>
-                        {{ bankAccount.cash }}
-                        {{ bankAccount.currency_type.symbol }}
                     </td>
                     <td class="px-6 py-4 text-center">
                         {{ bankAccount.interest_percentage }}%

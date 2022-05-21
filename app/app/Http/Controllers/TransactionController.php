@@ -31,7 +31,7 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTrtansactionRequest  $request
+     * @param  \App\Http\Requests\StoreTransactionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTransactionRequest $request)
@@ -42,10 +42,10 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Trtansaction  $trtansaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $trtansaction)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -53,10 +53,10 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Trtansaction  $trtansaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $trtansaction)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -64,11 +64,11 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTrtansactionRequest  $request
-     * @param  \App\Models\Trtansaction  $trtansaction
+     * @param  \App\Http\Requests\UpdateTransactionRequest  $request
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTransactionRequest $request, Transaction $trtansaction)
+    public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
         //
     }
@@ -76,10 +76,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Trtansaction  $trtansaction
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $trtansaction)
+    public function destroy(Transaction $transaction)
     {
         //
     }
