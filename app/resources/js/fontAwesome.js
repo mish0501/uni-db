@@ -8,11 +8,11 @@ import {
     faCheckCircle, faXmarkCircle, faExclamationCircle, faInfoCircle,
 
     // Misc
-    faUser, faCreditCard, faMoneyBillTransfer
+    faUser, faCreditCard, faMoneyBillTransfer, faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faPlus, faPen, faTrashCan, faCheckCircle, faXmarkCircle, faExclamationCircle, faInfoCircle, faUser, faCreditCard, faMoneyBillTransfer);
+library.add(faPlus, faPen, faTrashCan, faCheckCircle, faXmarkCircle, faExclamationCircle, faInfoCircle, faUser, faCreditCard, faMoneyBillTransfer, faSearch);
 
 export {
     FontAwesomeIcon

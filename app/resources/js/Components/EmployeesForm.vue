@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from "@inertiajs/inertia-vue3";
-import { defineProps } from "vue";
 
 const { employee, url, action, positions } = defineProps({
     employee: {

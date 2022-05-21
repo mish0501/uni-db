@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from "@inertiajs/inertia-vue3";
-import { defineProps } from "vue";
 
 const { client, url, action } = defineProps({
     client: {

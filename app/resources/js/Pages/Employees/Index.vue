@@ -1,13 +1,40 @@
 <script setup>
 import BreezeAuthenticatedLayout from "@/Layouts/Authenticated.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import Search from "@/Components/Search.vue";
+import { ref } from "vue";
 
-const { employees } = defineProps({
+const employees = ref([]);
+
+const { employees: e } = defineProps({
     employees: {
         type: Array,
         default: () => [],
     },
 });
+
+employees.value = e;
+
+const onSearch = (search) => {
+    if (search || search === "") {
+        employees.value = e.filter((employee) => {
+            return (
+                employee.user.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                employee.user.email
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                employee.user.phone
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                employee.position.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+            );
+        });
+    }
+};
 </script>
 
 <template>
@@ -24,14 +51,18 @@ const { employees } = defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <Link
-                            :href="route('employees.create')"
-                            class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded my-3"
-                            as="button"
-                        >
-                            <font-awesome-icon icon="plus" />
-                            Добави
-                        </Link>
+                        <div class="flex justify-between align-middle">
+                            <Link
+                                :href="route('employees.create')"
+                                class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded my-3"
+                                as="button"
+                            >
+                                <font-awesome-icon icon="plus" />
+                                Добави
+                            </Link>
+
+                            <Search :onChange="onSearch" />
+                        </div>
 
                         <div
                             class="relative overflow-x-auto shadow-md sm:rounded-lg"
